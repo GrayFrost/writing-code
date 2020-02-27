@@ -1,18 +1,21 @@
 // instanceof 原理
-function myInstanceOf(left, right){
-  while(left){
-    if(left === right.prototype){
+function myInstanceOf(obj, con) {
+  let left = obj.__proto__;
+  let right = con.prototype;
+  while (true) {
+    if (left === null) {
+      return false;
+    } else {
+    }
+    if (left === right) {
       return true;
     }
-    left = left.__proto__
+    left = left.__proto__;
   }
-  return false;
 }
 
-function A(){
+function A() {}
 
-}
-
-function B(){}
+function B() {}
 let a = new A();
 console.log(myInstanceOf(a, B));
