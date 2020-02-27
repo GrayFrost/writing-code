@@ -1,22 +1,25 @@
 class Event {
   constructor(){
-    this.items = {}
+    this.events = {}
   }
-  on(key, fn){
-    if(!this.items.hasOwnProperty(key)){
-      this.items[key] = [fn];
+  on(event, cb){
+    if(!this.events[event]){
+      this.events[event] = [];
     }
-    this.items[key].push(fn);
+    this.events[event].push(cb);
   }
-  emit(key){
-    if(!this.items.hasOwnProperty(key)){
+  emit(event, ...args){
+    if(!this.events[event]){
       return;
     }
-    this.items[key].forEach((fn, index) => {
-      fn();
+    this.events[event].forEach((fn, index) => {
+      fn.call(this, ...args);
     })
   }
-  off(key, fn){
+  off(event, fn){
+    // TODO: 
   }
-  once(){}
+  once(event, fn){
+    
+  }
 }
