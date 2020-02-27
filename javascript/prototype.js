@@ -28,3 +28,4 @@ function Student4(name){
   Person4.call(this, name);
 }
 Student4.prototype = Object.create(Person4.prototype);
+Student4.prototype.constructor = Student4;
