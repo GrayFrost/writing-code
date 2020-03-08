@@ -11,10 +11,13 @@
 + bind
 + promise
 + EventEmitter
++ curry
++ flatten
++ clone
++ LazyMan
 
 ## 数据结构
 + Set
-+ Map
 + Stack
 + List
 + LinkedList
@@ -24,4 +27,5 @@
 + 冒泡排序
 + 插入排序
 + 选择排序
++ 归并排序
 + 快速排序
