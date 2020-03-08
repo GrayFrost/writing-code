@@ -1,3 +1,4 @@
+// 数组扁平化
 function flatten(arr) {
   return arr
     .toString()

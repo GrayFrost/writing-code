@@ -1,3 +1,4 @@
+// event emitter
 class Event {
   constructor() {
     this.events = {};

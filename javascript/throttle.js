@@ -1,3 +1,4 @@
+// 节流
 function throttle(fn, ms) {
   let timeout;
   return function() {
