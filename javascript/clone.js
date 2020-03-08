@@ -6,6 +6,6 @@ function clone(target) {
     for (let i in target) {
       copy[i] = clone(target[i]);
     }
+    return copy;
   }
-  return copy;
 }
