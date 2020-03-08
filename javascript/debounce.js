@@ -1,12 +1,14 @@
-function debounce(fn, ms){
+function debounce(fn, ms) {
   let timeout;
-  return function(){
-    if(timeout){
+  return function() {
+    let context = this;
+    let args = arguments;
+    if (timeout) {
       clearTimeout(timeout);
     }
-    let args = arguments;
-    timeout = setTimeout(() => {
-      fn.call(this, ...args);
+
+    timeout = setTimeout(function() {
+      fn.apply(context, args);
     }, ms);
-  }
+  };
 }
