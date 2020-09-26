@@ -11,3 +11,15 @@ function throttle(fn, ms) {
     }
   };
 }
+
+function throttle2(fn, ms){
+  let prev = Date.now();
+  return function(){
+    let args = [...arguments];
+    let now = Date.now();
+    if(now - prev > ms * 1000){
+      fn.apply(this, args);
+      prev = now;
+    }
+  }
+}
