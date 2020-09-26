@@ -1,6 +1,6 @@
 // instanceof 原理
 function myInstanceOf(obj, con) {
-  let left = obj.__proto__;
+  let left = Object.getPrototypeOf(obj);
   let right = con.prototype;
   while (true) {
     if (left === null) {
@@ -10,10 +10,11 @@ function myInstanceOf(obj, con) {
     if (left === right) {
       return true;
     }
-    left = left.__proto__;
+    left = Object.getPrototypeOf(left);
   }
 }
 
+// 示例测试
 function A() {}
 
 function B() {}
