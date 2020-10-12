@@ -7,8 +7,9 @@ function swap(i, j, array) {
 
 function selectSort(arr) {
     const length = arr.length;
+    let min;
     for (let i = 0; i < length; i++) {
-        let min = i;
+        min = i;
         for (let j = i + 1; j < length; j++) {
             if (arr[j] < arr[min]) {
                 min = j;
