@@ -16,7 +16,7 @@ function deepClone(source, hash = new WeakMap()) {
 }
 
 function isObject(obj) {
-  return Object.prototype.toString.call(obj) === "[object Object]";
+  return Object.prototype.toString.call(obj) === "[object Object]"; // FIXME: 这个判断不太严谨，有时间修复
 }
 
 // 示例测试
