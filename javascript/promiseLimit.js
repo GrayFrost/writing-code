@@ -59,40 +59,44 @@ function test() {
 
 test();
 
-// review
-class Limit {
-    constructor(max) {
-        this.max = 2;
-        this.queue = [];
-        this.count = 0;
+// limit 2
+function Scheduler(){
+    this.list = [];
+    this.add = function(promiseCreator){
+      this.list.push(promiseCreator);
     }
-    request(promise, ...args) {
-        return new Promise((resolve, reject) => {
-            let task = this.createTask(
-                promise.bind(null, args),
-                resolve,
-                reject
-            );
-            if (this.count >= this.max) {
-                this.queue.push(task);
-            } else {
-                task();
-            }
-        });
+    this.maxCount = 2;
+  
+    var tempRunIndex = 0;
+    this.taskStart = function(){
+      for(let i = 0; i < this.maxCount; i++){
+        request.bind(this)();
+      }
     }
-    createTask(promise, resolve, reject) {
-        return () => {
-            promise()
-                .then((value) => resolve(value))
-                .catch((error) => reject(error))
-                .finally(() => {
-                    this.count--;
-                    if (this.queue.length) {
-                        let task = this.queue.shift();
-                        task();
-                    }
-                });
-            this.count++;
-        };
+  
+    function request(){
+      if(!this.list || !this.list.length || tempRunIndex >= this.maxCount){
+        return;
+      }
+      tempRunIndex++;
+      this.list.shift()().then(() => {
+        tempRunIndex--;
+        request.bind(this)()
+      })
     }
-}
+  }
+  let scheduler = new Scheduler();
+  function timeout(time){
+    return new Promise((resolve, reject) => setTimeout(resolve, time))
+  }
+  
+  function addTask(time, order){
+    scheduler.add(() => timeout(time).then(() => console.log(order)))
+  }
+  
+  addTask(1000, 1);
+  addTask(500, 2);
+  addTask(300, 3);
+  addTask(400, 4);
+  
+  scheduler.taskStart();
